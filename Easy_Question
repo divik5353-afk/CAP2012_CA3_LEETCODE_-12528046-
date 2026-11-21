@@ -1,0 +1,301 @@
+//EASY QUESTION 
+// QUESTION 509 FIBONACCI NUMBER
+
+class Solution {
+public:
+    int fib(int n) {
+
+
+        if (n == 0) {
+            return 0;
+        }
+        else if (n == 1) {
+            return 1;
+        }
+
+        
+        else {
+            return fib(n - 1) + fib(n - 2);
+        }
+    }
+};
+
+//QUESTION 1281 SUBTRACT THE PRODUCT AND SUM OF DIGITS OF AN INTEGER
+
+class Solution {
+public:
+    int subtractProductAndSum(int n) {
+
+        int product = 1;
+        int sum = 0;
+
+        while (n > 0) {
+
+            
+            int digit = n % 10;
+
+            
+            product = product * digit;
+            sum = sum + digit;
+
+            
+            n = n / 10;
+        }
+
+        
+        return product - sum;
+    }
+};
+
+//QUESTION 26 REMOVE DUPLICATES FROM SORTED ARRAY
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        if(nums.empty()){
+            return 0;
+        }
+        int newIndex = 1;
+        for(int i = 1; i<nums.size(); i++){
+            if(nums[i] != nums[i-1]){
+                nums[newIndex] = nums[i];
+                newIndex++;
+            }
+           
+        }
+         return newIndex;
+    }
+};
+
+//QUESTION REMOVE ELEMENT
+
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+
+        int k = 0;
+
+        
+        for (int i = 0; i < nums.size(); i++) {
+
+            
+            if (nums[i] != val) {
+
+            
+                nums[k] = nums[i];
+
+                
+                k++;
+            }
+        }
+
+        
+        return k;
+    }
+};
+
+//QUESTION 88 MERGE SORTED ARRAY
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int i = m - 1;
+        int j = n - 1;
+        int k = m + n - 1;
+
+        while (i >= 0 && j >= 0) {
+            if (nums1[i] > nums2[j]) {
+                nums1[k] = nums1[i];
+                i--;
+            } 
+            else {
+                nums1[k] = nums2[j];
+                j--;
+            }
+            k--;
+        }
+
+        
+        while (j >= 0) {
+            nums1[k] = nums2[j];
+            j--;
+            k--;
+        }
+    }
+};
+
+//QUESTION 206 REVERSE LINKED LIST
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+
+        ListNode* prev = nullptr;
+        ListNode* curr = head;
+
+        while (curr != nullptr) {
+
+            
+            ListNode* nextNode = curr->next;
+
+            
+            curr->next = prev;
+
+            
+            prev = curr;
+
+            
+            curr = nextNode;
+        }
+
+        return prev;
+    }
+};
+
+//QUESTION 83 REMOVE DUPLICATE FROM SORTED LIST
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+
+        ListNode* prev = nullptr;
+        ListNode* curr = head;
+
+        while (curr != nullptr) {
+
+            
+            ListNode* nextNode = curr->next;
+
+            
+            curr->next = prev;
+
+            
+            prev = curr;
+
+            
+            curr = nextNode;
+        }
+
+        return prev;
+    }
+};
+
+//QUESTION 20 VALID PARENTHESES
+class Solution {
+public:
+    bool isValid(string s) {
+
+        stack<char> st;
+
+        
+        for (int i = 0; i < s.length(); i++) {
+
+            
+            if (s[i] == '(' || s[i] == '{' || s[i] == '[') {
+                st.push(s[i]);
+            }
+
+            
+            else {
+
+                
+                if (st.empty()) {
+                    return false;
+                }
+
+
+                if (s[i] == ')' && st.top() == '(') {
+                    st.pop();
+                }
+                else if (s[i] == '}' && st.top() == '{') {
+                    st.pop();
+                }
+                else if (s[i] == ']' && st.top() == '[') {
+                    st.pop();
+                }
+                else {
+                    return false;
+                }
+            }
+        }
+
+        
+        return st.empty();
+    }
+};
+
+//QUESTION 232 IMPLEMENT QUEUE USING STACKS
+class MyQueue {
+public:
+
+    stack<int> st1;
+    stack<int> st2;
+
+    
+    MyQueue() {
+    }
+
+    
+    void push(int x) {
+
+        st1.push(x);
+    }
+
+    
+    int pop() {
+
+
+        if (st2.empty()) {
+            while (!st1.empty()) {
+                st2.push(st1.top());
+                st1.pop();
+            }
+        }
+
+        int ans = st2.top();
+        st2.pop();
+
+        return ans;
+    }
+
+    
+    int peek() {
+
+        
+        if (st2.empty()) {
+            while (!st1.empty()) {
+                st2.push(st1.top());
+                st1.pop();
+            }
+        }
+
+        return st2.top();
+    }
+
+
+    bool empty() {
+
+        return st1.empty() && st2.empty();
+    }
+};
+
+
